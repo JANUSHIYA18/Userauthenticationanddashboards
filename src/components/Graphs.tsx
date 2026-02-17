@@ -2,13 +2,13 @@ import { useNavigate } from 'react-router';
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Navigation } from './Navigation';
 
-const semesterData = [
-  { semester: 'Sem 1', average: 72 },
-  { semester: 'Sem 2', average: 75 },
-  { semester: 'Sem 3', average: 78 },
-  { semester: 'Sem 4', average: 81 },
-  { semester: 'Sem 5', average: 83 },
-  { semester: 'Sem 6', average: 85 },
+const examData = [
+  { exam: 'Exam 1', average: 72 },
+  { exam: 'Exam 2', average: 75 },
+  { exam: 'Exam 3', average: 78 },
+  { exam: 'Exam 4', average: 81 },
+  { exam: 'Exam 5', average: 83 },
+  { exam: 'Exam 6', average: 85 },
 ];
 
 const subjectData = [
@@ -35,22 +35,22 @@ export function Graphs() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 animate-fadeIn">
       <Navigation role={user.role || 'Student'} onLogout={handleLogout} />
 
-      <div className="max-w-7xl mx-auto p-6">
+      <div className="max-w-7xl mx-auto p-6 animate-slideUp">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Graphs & Visualization</h1>
-          <p className="text-gray-600">Graphs help visualize performance trends over semesters.</p>
+          <p className="text-gray-600">Graphs help visualize performance trends over exams.</p>
         </div>
 
-        {/* Semester-wise Line Chart */}
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 mb-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Semester-wise Performance Trend</h2>
+        {/* Exam-wise Line Chart */}
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 mb-6 card-hover">
+          <h2 className="text-xl font-bold text-gray-900 mb-4">Exam-wise Performance Trend</h2>
           <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={semesterData}>
+            <LineChart data={examData}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="semester" />
+              <XAxis dataKey="exam" />
               <YAxis domain={[0, 100]} />
               <Tooltip />
               <Legend />
@@ -68,7 +68,7 @@ export function Graphs() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Subject-wise Bar Chart */}
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 card-hover">
             <h2 className="text-xl font-bold text-gray-900 mb-4">Subject-wise Marks</h2>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={subjectData}>
@@ -83,7 +83,7 @@ export function Graphs() {
           </div>
 
           {/* Performance Pie Chart */}
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 card-hover">
             <h2 className="text-xl font-bold text-gray-900 mb-4">Overall Performance Distribution</h2>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>

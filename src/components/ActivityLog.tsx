@@ -80,41 +80,53 @@ export function ActivityLog() {
 
   const handleLogout = () => {
     sessionStorage.removeItem('user');
+    sessionStorage.removeItem('token');
     navigate('/');
   };
 
-  const getIcon = (type: string) => {
+  const getActivityIcon = (type: string) => {
     switch (type) {
       case 'login':
-        return <LogIn className="w-5 h-5 text-blue-600" />;
-      case 'upload':
-        return <Upload className="w-5 h-5 text-green-600" />;
-      case 'download':
-        return <Download className="w-5 h-5 text-purple-600" />;
+        return <LogIn className="w-4 h-4 text-blue-600" />;
       case 'update':
-        return <FileText className="w-5 h-5 text-amber-600" />;
+        return <FileText className="w-4 h-4 text-green-600" />;
+      case 'download':
+        return <Download className="w-4 h-4 text-purple-600" />;
+      case 'upload':
+        return <Upload className="w-4 h-4 text-indigo-600" />;
+      case 'view':
+        return <User className="w-4 h-4 text-amber-600" />;
+      case 'generate':
+        return <FileText className="w-4 h-4 text-red-600" />;
       default:
-        return <Activity className="w-5 h-5 text-gray-600" />;
+        return <Activity className="w-4 h-4 text-gray-600" />;
     }
   };
 
   const getTypeBadge = (type: string) => {
-    const colors = {
-      login: 'bg-blue-100 text-blue-700',
-      upload: 'bg-green-100 text-green-700',
-      download: 'bg-purple-100 text-purple-700',
-      update: 'bg-amber-100 text-amber-700',
-      view: 'bg-gray-100 text-gray-700',
-      generate: 'bg-indigo-100 text-indigo-700',
-    };
-    return colors[type as keyof typeof colors] || 'bg-gray-100 text-gray-700';
+    switch (type) {
+      case 'login':
+        return 'bg-blue-100 text-blue-700';
+      case 'update':
+        return 'bg-green-100 text-green-700';
+      case 'download':
+        return 'bg-purple-100 text-purple-700';
+      case 'upload':
+        return 'bg-indigo-100 text-indigo-700';
+      case 'view':
+        return 'bg-amber-100 text-amber-700';
+      case 'generate':
+        return 'bg-red-100 text-red-700';
+      default:
+        return 'bg-gray-100 text-gray-700';
+    }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 animate-fadeIn">
       <Navigation role="Admin" onLogout={handleLogout} />
 
-      <div className="max-w-6xl mx-auto p-6">
+      <div className="max-w-7xl mx-auto p-6 animate-slideUp">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Activity Log</h1>
           <p className="text-gray-600">This module tracks system usage for transparency.</p>
@@ -122,23 +134,23 @@ export function ActivityLog() {
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 card-hover">
             <p className="text-sm text-gray-600 mb-1">Today's Activities</p>
             <p className="text-2xl font-bold text-gray-900">{activityLogs.length}</p>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 card-hover">
             <p className="text-sm text-gray-600 mb-1">Logins</p>
             <p className="text-2xl font-bold text-blue-600">
               {activityLogs.filter(log => log.type === 'login').length}
             </p>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 card-hover">
             <p className="text-sm text-gray-600 mb-1">Updates</p>
             <p className="text-2xl font-bold text-amber-600">
               {activityLogs.filter(log => log.type === 'update').length}
             </p>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 card-hover">
             <p className="text-sm text-gray-600 mb-1">Downloads</p>
             <p className="text-2xl font-bold text-purple-600">
               {activityLogs.filter(log => log.type === 'download').length}
@@ -147,10 +159,10 @@ export function ActivityLog() {
         </div>
 
         {/* Activity Timeline */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 card-hover">
           <div className="p-6 border-b border-gray-200 flex items-center justify-between">
             <h2 className="text-xl font-bold text-gray-900">Recent Activity</h2>
-            <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm">
+            <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm glow-button-subtle">
               <Download className="w-4 h-4" />
               Export Logs
             </button>
@@ -161,7 +173,7 @@ export function ActivityLog() {
               <div key={log.id} className="p-4 hover:bg-gray-50 transition-colors">
                 <div className="flex items-start gap-4">
                   <div className="mt-1 flex-shrink-0">
-                    {getIcon(log.type)}
+                    {getActivityIcon(log.type)}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
@@ -183,7 +195,7 @@ export function ActivityLog() {
         </div>
 
         {/* Info Box */}
-        <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-6 mt-6">
+        <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-6 mt-6 card-hover">
           <h3 className="font-medium text-indigo-900 mb-2">Activity Logging Policy</h3>
           <ul className="text-sm text-indigo-700 space-y-1">
             <li>• All user actions are automatically logged for security and audit purposes</li>

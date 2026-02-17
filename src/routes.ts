@@ -7,6 +7,8 @@ import { Graphs } from "./components/Graphs";
 import { Recommendations } from "./components/Recommendations";
 import { Reports } from "./components/Reports";
 import { ActivityLog } from "./components/ActivityLog";
+import { TeacherReports } from "./components/TeacherReports";
+import { ClassManagement } from "./components/ClassManagement";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +22,14 @@ export const router = createBrowserRouter([
   {
     path: "/faculty",
     Component: FacultyDashboard,
+  },
+  {
+    path: "/class-management",
+    Component: ClassManagement,
+  },
+  {
+    path: "/teacher-reports",
+    Component: TeacherReports,
   },
   {
     path: "/student",

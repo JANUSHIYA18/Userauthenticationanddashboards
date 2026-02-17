@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router';
-import { LayoutDashboard, BarChart3, Lightbulb, FileText, Activity, LogOut } from 'lucide-react';
+import { LayoutDashboard, BarChart3, Lightbulb, FileText, Activity, LogOut, ClipboardList } from 'lucide-react';
 
 interface NavigationProps {
   role: 'Admin' | 'Faculty' | 'Student';
@@ -20,8 +20,9 @@ export function Navigation({ role, onLogout }: NavigationProps) {
     } else if (role === 'Faculty') {
       return [
         { label: 'Dashboard', icon: LayoutDashboard, path: '/faculty' },
+        { label: 'Class Management', icon: ClipboardList, path: '/class-management' },
         { label: 'Graphs', icon: BarChart3, path: '/graphs' },
-        { label: 'Reports', icon: FileText, path: '/reports' },
+        { label: 'Class Reports', icon: FileText, path: '/teacher-reports' },
       ];
     } else {
       return [

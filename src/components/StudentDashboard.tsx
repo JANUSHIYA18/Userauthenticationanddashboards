@@ -26,9 +26,9 @@ export function StudentDashboard() {
   const attendance = 82;
   const overallPerformance = 'Average';
   const weakSubjects = subjects.filter(s => s.status === 'weak');
-  const cgpa = 8.2;
+  const academicPercentage = 81;
   const feesPending = 1500;
-  const arrearCount = 1;
+  const drawbacksCount = 1;
 
   const handleLogout = () => {
     sessionStorage.removeItem('user');
@@ -42,10 +42,10 @@ export function StudentDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 animate-fadeIn">
       <Navigation role="Student" onLogout={handleLogout} />
 
-      <div className="max-w-7xl mx-auto p-6">
+      <div className="max-w-7xl mx-auto p-6 animate-slideUp">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Student Progress Dashboard</h1>
           <p className="text-gray-600">Students can track their academic progress and weak areas.</p>
@@ -53,17 +53,17 @@ export function StudentDashboard() {
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 card-hover">
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
                 <BookOpen className="w-6 h-6 text-blue-600" />
               </div>
             </div>
-            <p className="text-gray-600 text-sm mb-1">CGPA</p>
-            <p className="text-2xl font-bold text-gray-900">{cgpa}</p>
+            <p className="text-gray-600 text-sm mb-1">Academic Percentage</p>
+            <p className="text-2xl font-bold text-gray-900">{academicPercentage}%</p>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 card-hover">
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
                 <Calendar className="w-6 h-6 text-green-600" />
@@ -73,17 +73,17 @@ export function StudentDashboard() {
             <p className="text-2xl font-bold text-gray-900">{attendance}%</p>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 card-hover">
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
                 <FileX className="w-6 h-6 text-red-600" />
               </div>
             </div>
-            <p className="text-gray-600 text-sm mb-1">Arrears</p>
-            <p className="text-2xl font-bold text-gray-900">{arrearCount}</p>
+            <p className="text-gray-600 text-sm mb-1">Drawbacks</p>
+            <p className="text-2xl font-bold text-gray-900">{drawbacksCount}</p>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 card-hover">
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
                 <DollarSign className="w-6 h-6 text-amber-600" />
@@ -96,7 +96,7 @@ export function StudentDashboard() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* Subject-wise Performance */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 card-hover">
             <div className="p-6 border-b border-gray-200">
               <h2 className="text-xl font-bold text-gray-900">Subject-wise Marks</h2>
             </div>
@@ -134,7 +134,7 @@ export function StudentDashboard() {
           </div>
 
           {/* Upcoming Events & Deadlines */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 card-hover">
             <div className="p-6 border-b border-gray-200">
               <h2 className="text-xl font-bold text-gray-900">Upcoming Events & Deadlines</h2>
             </div>
@@ -161,7 +161,7 @@ export function StudentDashboard() {
         </div>
 
         {/* Faculty Planned Actions */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 mb-6">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 mb-6 card-hover">
           <div className="p-6 border-b border-gray-200">
             <h2 className="text-xl font-bold text-gray-900">Planned Actions by Faculty</h2>
           </div>
@@ -186,7 +186,7 @@ export function StudentDashboard() {
 
         {/* Weak Subjects Alert */}
         {weakSubjects.length > 0 && (
-          <div className="bg-red-50 border border-red-200 rounded-xl p-6">
+          <div className="bg-red-50 border border-red-200 rounded-xl p-6 card-hover">
             <div className="flex items-start gap-3">
               <TrendingDown className="w-6 h-6 text-red-600 flex-shrink-0 mt-1" />
               <div>
